@@ -5,7 +5,7 @@ import "./App.css";
 import Loading from "./cmp/Loading/loading";
 
 import { Button } from "@material-tailwind/react";
-import { replacePersianWithEnglishNumbers } from "./Helper/Helper";
+import { checkCode, checkCodeMeli, replacePersianWithEnglishNumbers } from "./Helper/Helper";
 import { DataTable } from "./cmp/DataTable/DataTable";
 
 function App() {
@@ -64,16 +64,22 @@ function App() {
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className="form-group">
             <label>کد ملی</label>
-            <input
+            {/* <input
               type="text"
               {...register("ssn", {
                 required: "کد ملی الزامی است",
+                validate: checkCodeMeli,
                 pattern: {
                   value: /^\d{10}$/,
                   message: "فرمت کدملی صحیح نیست",
                 },
               })}
-            />
+            /> */}
+              <input 
+          {...register("ssn", { 
+            validate: checkCodeMeli 
+          })}
+        />
             {errors.ssn && (
               <p className="text-sm text-red-700">{errors.ssn.message}</p>
             )}
@@ -82,9 +88,8 @@ function App() {
           <div className="form-group">
             <label>کد بیمارستان</label>
             <input
-              type="number"
               {...register("code", {
-                required: "کد بیمارستان الزامی است",
+                validate:checkCode
               })}
             />
             {errors.code && (
