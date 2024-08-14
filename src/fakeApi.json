@@ -1,0 +1,22 @@
+{
+  "code": "7",
+  "name": "علی",
+  "lastName": "کارایی",
+  "fatherName": "سامان",
+  "ssnNo": "5001111102",
+  "birthDate": "1996/05/21",
+  "picture": "picture base64 content ...",
+  "fingerPrint": "fingerPrint base64 content ...",
+  "visitexplanation": "مگالی، ژیگانتیسم، سندروم کوشینگ، دیابت بی مزه، آدنوم هیپوفیز، هیپوفونکسیون کلیهیپوفیز(, )بیماری های غدد مترشحه داخلی - بیماری های غدد هیپوفیز شامل: آکرومگال",
+  "city": "تهران",
+  "province": "تهران",
+  "address": "میرداماد",
+  "mobileNo": "09312342412",
+  "zipCode": "3214134332",
+  "phoneNo": "09312342412",
+  "referenced": false
+}
+
+
+//fake api url
+// Success! Your API is available at https://mocki.io/v1/f8b9a316-198f-4a27-9457-4be933586a58

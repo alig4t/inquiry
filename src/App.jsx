@@ -21,16 +21,21 @@ function App() {
 
   async function getPersonInfoBySsn(ssn, treatmentCenterCode) {
     setLoading(true)
+   
     const endpoint = `${
       import.meta.env.VITE_APP_REQUEST_BASE_URL
     }/medical/person-infos/getBySsn/${ssn}/${treatmentCenterCode}`;
 
+    // Fake api url
+    // Success! Your API is available at https://mocki.io/v1/f8b9a316-198f-4a27-9457-4be933586a58
+    
     axios
-      .post(endpoint)
+      .get(endpoint)
       .then((response) => {
         console.log(response.data);
         setInfo(response.data);
         setFetchData(true);
+        
       })
       .catch((error) => {
         if (error.response && error.response.status === 404) {
@@ -55,7 +60,7 @@ function App() {
   };
 
   return (
-    <div className="w-full h-full relative pt-20">
+    <div className="w-full h-full relative py-20">
       <div className="form-container">
         <h1 className="font-bold text-2xl text-blue-gray-700">
           {import.meta.env.VITE_APP_BASE_TITLE}
@@ -64,17 +69,7 @@ function App() {
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className="form-group">
             <label>کد ملی</label>
-            {/* <input
-              type="text"
-              {...register("ssn", {
-                required: "کد ملی الزامی است",
-                validate: checkCodeMeli,
-                pattern: {
-                  value: /^\d{10}$/,
-                  message: "فرمت کدملی صحیح نیست",
-                },
-              })}
-            /> */}
+      
               <input 
           {...register("ssn", { 
             validate: checkCodeMeli 
