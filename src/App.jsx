@@ -2,7 +2,11 @@ import { useState } from 'react'
 import { useForm } from 'react-hook-form';
 import axios from 'axios';
 import './App.css'
+import Loading from './cmp/Loading/loading';
 
+import { Button } from "@material-tailwind/react";
+import { replacePersianWithEnglishNumbers } from './Helper/Helper';
+ 
 function App() {
 
 
@@ -15,6 +19,7 @@ function App() {
       handleSubmit,
       formState: { errors },
     } = useForm();
+  
   
 
 async function getPersonInfoBySsn(ssn, treatmentCenterCode) {
@@ -41,58 +46,74 @@ async function getPersonInfoBySsn(ssn, treatmentCenterCode) {
 }
 
 
-function replacePersianWithEnglishNumbers(input) {
-  if (input == null) {
-    return input;
-  }
-  return input.replace('\u06f0', '0').replace('\u06f1', '1').replace('\u06f2', '2').replace('\u06f3', '3').replace('\u06f4', '4').replace('\u06f5', '5')
-    .replace('\u06f6', '6').replace('\u06f7', '7').replace('\u06f8', '8').replace('\u06f9', '9');
-}
 
-
-const submitForm = (values) => {
+const onSubmit = (values) => {
   console.log(values)
-
-  if(values.ssn.length != 10){
-    alert("کد ملی معتبر نیست")
-    return;
-  }
-
-  
-  if(values.code.length === 0){
-    alert("کد مرکز معتبر نیست")
-    return;
-  }
+  let eng_ssn = replacePersianWithEnglishNumbers(values.ssn)
+  let eng_code = replacePersianWithEnglishNumbers(values.code)
+  console.log(eng_ssn);
+  console.log(eng_code);
   getPersonInfoBySsn(values.ssn,values.code)
-
 }
+
 
 
   return (
-    <>
+    <div className='w-full h-full relative pt-20'>
     
-  
+    {loading ? <Loading /> : 
+  fetchData ? (
+    <>
+
+    </>
+  ):null
+
+}
+ 
+
+
     <div className="form-container">
-    <h1 className='font-bold text-2xl text-slate-800'>
+    <h1 className='font-bold text-2xl text-blue-gray-700'>
      {import.meta.env.VITE_APP_BASE_TITLE}
     </h1>
     
 
-    <form onSubmit={handleSubmit((data) => submitForm(data))}>
-    <div className="form-group">
-    <label for="name">کد ملی</label>
-      <input {...register('ssn' ,{ required: true })} />
-      {errors.ssn && <p className='text-sm text-red-700'>کد ملی اجباری است.</p>}
-      <label for="code">کد مرکز درمان</label>
-      <input {...register('code', { required: true })} />
-      {errors.code && <p className='text-sm text-red-700'>کد مرکز درمان اجباری است.</p>}
-      <input type="submit" className='mt-[25px]' />
+    <form onSubmit={handleSubmit(onSubmit)}>
+      <div className="form-group">
+        <label>کد ملی</label>
+        <input
+          type="text"
+          {...register('ssn', {
+            required: 'کد ملی الزامی است',
+            pattern: {
+              value: /^\d{10}$/,
+              message: 'فرمت کدملی صحیح نیست',
+            },
+          })}
+        />
+        {errors.ssn && <p className='text-sm text-red-700'>{errors.ssn.message}</p>}
       </div>
-    </form>
 
+      <div className="form-group">
+        <label>کد بیمارستان</label>
+        <input
+          type="number"
+          {...register('code', {
+            required: 'کد بیمارستان الزامی است',
+          })}
+        />
+        {errors.code && <p className='text-sm text-red-700'>{errors.code.message}</p>}
+      </div>
+
+
+      <Button color='green' type="submit" className="mt-6 text-lg font-normal" fullWidth>
+      مشاهده
+        </Button>
+    </form>
     
     
 </div>
+
 
 {fetchData && <div className='w-[80%] col-container mx-auto rtl'>
   
@@ -100,6 +121,8 @@ const submitForm = (values) => {
 <p>  شماره درخواست : {info.requestNo}</p>
 <p>  کد بیمارستان : {info.hospitalizeCode}</p>
   </div>
+
+
 
 <div className='col'>
 
@@ -121,7 +144,7 @@ const submitForm = (values) => {
 
 
 
-</>
+</div>
   )
 }
 
