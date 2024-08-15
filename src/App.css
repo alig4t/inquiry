@@ -34,18 +34,24 @@
 
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+  /* font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+    sans-serif; */
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   direction: rtl;
-  background-color: #fcfcfc;
-  font-family:'IRANSans-web' ;
+  background-color: #426e7e14;
+  font-family:'IRANSans-web' !important ;
 }
 button{
   font-family:'IRANSans-web' !important;
   
+}
+
+.Toastify__toast {
+  font-family:'IRANSans-web' !important;
+  font-size: 14px;
+  font-weight: bold;
 }
 
 code {
