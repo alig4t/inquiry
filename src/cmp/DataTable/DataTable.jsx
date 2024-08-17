@@ -21,7 +21,7 @@ export function DataTable({ data }) {
       <div className="w-full grid xl:grid-cols-4 xs:grid-cols-1 sm:grid-cols-1 md:grid-cols-3 gap-4 my-2">
         {lables.map((item) => {
           return (
-            <div className={`my-2 bg-[#efefef2e] rounded-sm p-2 flex ${item.key === "address" && "col-span-2"}`}>
+            <div key={item} className={`my-2 bg-[#efefef2e] rounded-sm p-2 flex ${item.key === "address" && "col-span-2"}`}>
               <p className="font-bold text-[14px] w-20 after:content-[':'] text-[#b12e75]">
                 {item.label}
               </p>
